@@ -1,7 +1,7 @@
 # math_py
 given any polynomial this code parses polynomila into coefficients and exponenents 
 and then plots graph for each range of x values entered. 
-This code is written for code practice. A library may already be present doing similar.
+This code is written for programming practice. A library may already be present doing similar.
 
 Usage:
 bash-3.2$  pyton polynomial_plot.py 
