@@ -8,13 +8,19 @@ coe = re.compile("(\d*)(x)\^*(\d*)")
 
 def find_coeff_expo(axn) :
     # axn is Cx^n
-    c , x , n = (coe.findall(axn))[0]
     coeff = 1
     expo = 1
-    if c != '' :
-        coeff = int (c)
-    if n != '' :
-        expo = int (n)
+
+    if axn.find('x') == -1 : # constant
+        coeff = int(axn) 
+        expo = 0 # coefficient of C x^0 
+    else :
+        c , x , n = (coe.findall(axn))[0]
+        if c != '' :
+            coeff = int (c)
+        if n != '' :
+            expo = int (n)
+
     return coeff , expo
 
  
@@ -61,27 +67,15 @@ def create_coeff_exponenet_array (polynomial) :
     poly_arr = []
     for i in range(len(signs)):
         v = vals[i]
-        #print (signs[i], v)
-        members = []
         sign = 1
         if signs[i] == '-' : # if + leave it as 1
             sign = -1
         
-        coeff = 0
-        exponent = 0
-
-        if v.find('x') == -1 : # constant
-            coeff = int(v) 
-            exponent = 0 # coefficient of x^0 is v
-        else :
-            coeff, exponent = find_coeff_expo(vals[i])
-
+        coeff, exponent = find_coeff_expo(v)
         poly_arr.append((sign * coeff, exponent ))
     
     return poly_arr
     
-
-
 polynomial = (input('enter the equation (ax^n+bx+c) : ')).strip()
 if polynomial :
     poly_arr = create_coeff_exponenet_array(polynomial)
@@ -94,4 +88,3 @@ while xrange :
         plt.plot(Xi, Yi)
         print("successfully plotted")
         plt.show() 
-        
